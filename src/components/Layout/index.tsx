@@ -38,7 +38,7 @@ const Layout: FC<any> = ({children, navigationRef}) => {
             <TouchableHighlight
               onPress={() => {
                 console.log('onPress');
-                navigationRef.navigate('Settings');
+                navigationRef.navigate('Home2');
                 setModalVisible(false);
               }}>
               <Text>Go home</Text>

@@ -8,24 +8,17 @@
  * @format
  */
 
-import React from 'react';
+import React, {FC} from 'react';
 import {
+  Button,
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import Layout from './components/Layout';
 
@@ -34,6 +27,7 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 function HomeScreen() {
   return (
@@ -43,6 +37,20 @@ function HomeScreen() {
   );
 }
 
+const Home: FC<any> = ({navigation}) => {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => {
+          navigation.navigate('Details2');
+        }}
+      />
+    </View>
+  );
+};
+
 function SettingsScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -51,117 +59,85 @@ function SettingsScreen() {
   );
 }
 
-const Tab = createBottomTabNavigator();
-
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
+const DetailsScreen: FC<any> = ({navigation}) => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => {
+          navigation.navigate('Details2');
+        }}
+      />
     </View>
   );
 };
 
-// 暂时做参考
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const InitHello = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={backgroundStyle}>
-      <Header />
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        <Section title="Step One">
-          Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-          screen and then come back to see your edits.
-        </Section>
-        <Section title="See Your Changes">
-          <ReloadInstructions />
-        </Section>
-        <Section title="Debug">
-          <DebugInstructions />
-        </Section>
-        <Section title="Learn More">
-          Read the docs to discover what to do next:
-        </Section>
-        <LearnMoreLinks />
-      </View>
-    </ScrollView>
-  );
-};
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const App = () => {
+const Main: FC<any> = ({navigationRef}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const navigationRef = useNavigationContainerRef();
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Layout navigationRef={navigationRef}>
-        <NavigationContainer ref={navigationRef}>
-          <Tab.Navigator>
-            <Tab.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{header: () => null}}
-            />
-            <Tab.Screen
-              name="Settings"
-              component={SettingsScreen}
-              options={{header: () => null}}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{header: () => null}}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{header: () => null}}
+          />
+        </Tab.Navigator>
       </Layout>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const App = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+  const navigationRef = useNavigationContainerRef();
+  return (
+    <>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <NavigationContainer ref={navigationRef}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            component={props => (
+              <Main {...props} navigationRef={navigationRef} />
+            )}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Home2"
+            component={props => (
+              <Home {...props} navigationRef={navigationRef} />
+            )}
+            options={{
+              headerBackTitle: 'back',
+            }}
+          />
+          <Stack.Screen
+            name="Details2"
+            component={props => <DetailsScreen {...props} />}
+            options={{
+              headerBackTitle: 'back',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+  );
+};
 
 export default App;
