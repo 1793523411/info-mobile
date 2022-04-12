@@ -9,14 +9,7 @@
  */
 
 import React, {FC} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -29,49 +22,10 @@ import {
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-const Home: FC<any> = ({navigation}) => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => {
-          navigation.navigate('Details2');
-        }}
-      />
-    </View>
-  );
-};
-
-function SettingsScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const DetailsScreen: FC<any> = ({navigation}) => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => {
-          navigation.navigate('Details2');
-        }}
-      />
-    </View>
-  );
-};
+import UserInfo from './pages/UserInfo';
+import HomeScreen from './pages/HomeScreen';
+import TopicScreen from './pages/TopicScreen';
+import Setting from './pages/Settings';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -91,8 +45,8 @@ const Main: FC<any> = ({navigationRef}) => {
             options={{header: () => null}}
           />
           <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
+            name="TopicScreen"
+            component={TopicScreen}
             options={{header: () => null}}
           />
         </Tab.Navigator>
@@ -119,17 +73,17 @@ const App = () => {
             }}
           />
           <Stack.Screen
-            name="Home2"
+            name="UserInfo"
             component={props => (
-              <Home {...props} navigationRef={navigationRef} />
+              <UserInfo {...props} navigationRef={navigationRef} />
             )}
             options={{
               headerBackTitle: 'back',
             }}
           />
           <Stack.Screen
-            name="Details2"
-            component={props => <DetailsScreen {...props} />}
+            name="Setting"
+            component={props => <Setting {...props} />}
             options={{
               headerBackTitle: 'back',
             }}
