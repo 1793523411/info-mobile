@@ -27,6 +27,8 @@ import HomeScreen from './pages/HomeScreen';
 import TopicScreen from './pages/TopicScreen';
 import Setting from './pages/Settings';
 
+import MyBack from './components/MyBack';
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,7 @@ const App = () => {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer ref={navigationRef}>
+        {/* <Stack.Navigator initialRouteName="UserInfo"> */}
         <Stack.Navigator>
           <Stack.Screen
             name="Main"
@@ -78,7 +81,7 @@ const App = () => {
               <UserInfo {...props} navigationRef={navigationRef} />
             )}
             options={{
-              headerBackTitle: 'back',
+              headerLeft: () => <MyBack navigationRef={navigationRef} />,
             }}
           />
           <Stack.Screen

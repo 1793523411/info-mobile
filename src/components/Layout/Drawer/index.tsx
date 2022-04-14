@@ -13,12 +13,13 @@ const Drawer = {
 const MyDrawer: FC<any> = ({navigationRef, setModalVisible}) => {
   return (
     <View style={Drawer.drawer}>
-      <DrawerHeader />
+      <DrawerHeader
+        navigationRef={navigationRef}
+        setModalVisible={setModalVisible}
+      />
       <TouchableHighlight
         onPress={() => {
           console.log('onPress');
-          navigationRef.navigate('UserInfo');
-          setModalVisible(false);
         }}>
         <Text>Go home</Text>
       </TouchableHighlight>
