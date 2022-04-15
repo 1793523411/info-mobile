@@ -28,7 +28,13 @@ const User = StyleSheet.create({
   },
 });
 
-const CellComponent: FC<any> = ({type, targetData}) => {
+const CellComponent: FC<any> = ({
+  type,
+  targetData,
+  navigationRef,
+  UserInfoData,
+  currentKey,
+}) => {
   const [isAvatorShow, setIsAvatorShow] = useState(false);
   if (type === ShowType.Img) {
     return (
@@ -56,12 +62,20 @@ const CellComponent: FC<any> = ({type, targetData}) => {
   }
   if (type === ShowType.Text) {
     return (
-      <Text
-        style={{
-          marginTop: 0,
-        }}>
-        {targetData}
-      </Text>
+      <TouchableHighlight
+        onPress={() =>
+          navigationRef.navigate('UserInfoEditor', {
+            UserInfoData,
+            currentKey,
+          })
+        }>
+        <Text
+          style={{
+            marginTop: 0,
+          }}>
+          {targetData}
+        </Text>
+      </TouchableHighlight>
     );
   }
   if (type === ShowType.Role) {
@@ -69,6 +83,7 @@ const CellComponent: FC<any> = ({type, targetData}) => {
       <Text
         style={{
           marginTop: 0,
+          color: '#555',
         }}>
         {RoleMap[targetData]}
       </Text>
@@ -77,8 +92,7 @@ const CellComponent: FC<any> = ({type, targetData}) => {
   return null;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const UserInfo: FC<any> = ({navigation}) => {
+const UserInfo: FC<any> = ({navigationRef}) => {
   return (
     <View style={User.Contain}>
       {userInfoMap?.map(item => {
@@ -91,7 +105,13 @@ const UserInfo: FC<any> = ({navigation}) => {
               }}>
               {item.label}
             </Text>
-            <CellComponent type={item.type} targetData={targetData} />
+            <CellComponent
+              type={item.type}
+              targetData={targetData}
+              navigationRef={navigationRef}
+              UserInfoData={MokcUserInfoData}
+              currentKey={item.key}
+            />
           </View>
         );
       })}

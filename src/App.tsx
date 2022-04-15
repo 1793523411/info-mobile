@@ -26,8 +26,12 @@ import UserInfo from './pages/UserInfo';
 import HomeScreen from './pages/HomeScreen';
 import TopicScreen from './pages/TopicScreen';
 import Setting from './pages/Settings';
+import {UserInfoEditorHeadRight} from './pages/UserInfoEditor';
 
 import MyBack from './components/MyBack';
+import UserInfoEditor from './pages/UserInfoEditor';
+
+import {commonHeaderTitleStye} from './const/header';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -82,6 +86,22 @@ const App = () => {
             )}
             options={{
               headerLeft: () => <MyBack navigationRef={navigationRef} />,
+              title: '个人信息',
+              headerTitleStyle: commonHeaderTitleStye,
+            }}
+          />
+          <Stack.Screen
+            name="UserInfoEditor"
+            component={props => (
+              <UserInfoEditor {...props} navigationRef={navigationRef} />
+            )}
+            options={{
+              headerLeft: () => <MyBack navigationRef={navigationRef} />,
+              headerRight: () => (
+                <UserInfoEditorHeadRight navigationRef={navigationRef} />
+              ),
+              title: '编辑',
+              headerTitleStyle: commonHeaderTitleStye,
             }}
           />
           <Stack.Screen
