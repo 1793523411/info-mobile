@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   Image,
   Text,
@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import {ShowType, MokcUserInfoData, userInfoMap, RoleMap} from './userConfig';
+import {getUserInfo, userLogin} from '../../api/user/index';
+import {saveUserToken, getUserToken} from '../../storage/user';
 
 const User = StyleSheet.create({
   Contain: {
@@ -92,7 +94,28 @@ const CellComponent: FC<any> = ({
   return null;
 };
 
+const work = async () => {
+  const res = await getUserInfo();
+  console.log('res', res);
+  saveUserToken('testToken');
+  console.log(await getUserToken());
+  setTimeout(async () => {
+    console.log(await getUserToken());
+  }, 10000);
+  const loginRes = await userLogin({
+    data: {
+      username: 'ygj111',
+      password: '123456',
+    },
+  });
+  console.log('loginRes', loginRes);
+};
+
 const UserInfo: FC<any> = ({navigationRef}) => {
+  useEffect(() => {
+    work();
+  }, []);
+
   return (
     <View style={User.Contain}>
       {userInfoMap?.map(item => {

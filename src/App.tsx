@@ -27,6 +27,7 @@ import HomeScreen from './pages/HomeScreen';
 import TopicScreen from './pages/TopicScreen';
 import Setting from './pages/Settings';
 import {UserInfoEditorHeadRight} from './pages/UserInfoEditor';
+import LoginPage from './pages/LoginPage';
 
 import MyBack from './components/MyBack';
 import UserInfoEditor from './pages/UserInfoEditor';
@@ -68,8 +69,8 @@ const App = () => {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer ref={navigationRef}>
-        {/* <Stack.Navigator initialRouteName="UserInfo"> */}
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="LoginPage">
+          {/* <Stack.Navigator> */}
           <Stack.Screen
             name="Main"
             component={props => (
@@ -108,6 +109,14 @@ const App = () => {
             name="Setting"
             component={props => <Setting {...props} />}
             options={{
+              headerBackTitle: 'back',
+            }}
+          />
+          <Stack.Screen
+            name="LoginPage"
+            component={props => <LoginPage {...props} />}
+            options={{
+              title: '用户登录',
               headerBackTitle: 'back',
             }}
           />
