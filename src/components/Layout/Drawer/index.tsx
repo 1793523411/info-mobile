@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import {View} from 'react-native';
 import DrawerHeader from './DrawerHeader';
 
 const Drawer = {
@@ -17,21 +17,6 @@ const MyDrawer: FC<any> = ({navigationRef, setModalVisible}) => {
         navigationRef={navigationRef}
         setModalVisible={setModalVisible}
       />
-      <TouchableHighlight
-        onPress={() => {
-          console.log('onPress');
-        }}>
-        <Text>Go home</Text>
-      </TouchableHighlight>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
-      <Text>drawer</Text>
     </View>
   );
 };

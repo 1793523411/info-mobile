@@ -1,5 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {updateUserInfo} from '../../api/user/index';
+import {saveUserInfo} from '../../storage/user';
 
 const UselessTextInput: FC<any> = props => {
   return <TextInput {...props} numberOfLines={5} editable maxLength={40} />;
@@ -14,16 +16,20 @@ export const UserInfoEditorHeadRight: FC<any> = ({navigationRef}) => {
         .routes.filter(
           (item: {name: string}) => item.name === 'UserInfoEditor',
         )?.[0]?.params;
-      setCurrentUserData(currentParams);
+      setCurrentUserData(currentParams?.UserInfoData);
       return () => {
         unsubscribe();
       };
     });
-  });
+  }, []);
   return (
     <TouchableHighlight
-      onPress={() => {
-        console.log('currentUserData', currentUserData);
+      onPress={async () => {
+        const res = await updateUserInfo({data: currentUserData});
+        await saveUserInfo(res.data);
+        navigationRef.navigate('UserInfo', {
+          UserInfoData: res.data,
+        });
       }}>
       <Text>完成</Text>
     </TouchableHighlight>

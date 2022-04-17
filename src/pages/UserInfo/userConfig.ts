@@ -2,6 +2,7 @@ export enum ShowType {
   Img = 1,
   Text = 2,
   Role = 3,
+  Disabled = 4,
 }
 
 export const RoleMap: Record<string, string> = {
@@ -25,36 +26,30 @@ export const userInfoMap = [
     label: '用户头像',
     type: ShowType.Img,
     key: 'avatar',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
   {
     label: '用户名',
-    type: ShowType.Text,
+    type: ShowType.Disabled,
     key: 'username',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
   {
     label: '用户昵称',
     type: ShowType.Text,
     key: 'nickname',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
   {
     label: '用户签名',
     type: ShowType.Text,
     key: 'desc',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
   {
     label: '用户邮箱',
     type: ShowType.Text,
     key: 'email',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
   {
     label: '用户类型',
     type: ShowType.Role,
     key: 'type',
-    value: 'https://reactnative.dev/img/tiny_logo.png',
   },
 ];

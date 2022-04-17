@@ -8,9 +8,9 @@ import {
   Modal,
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import {ShowType, MokcUserInfoData, userInfoMap, RoleMap} from './userConfig';
-import {getUserInfo, userLogin} from '../../api/user/index';
-import {saveUserToken, getUserToken} from '../../storage/user';
+import {ShowType, userInfoMap, RoleMap} from './userConfig';
+import {getUserInfo} from '../../storage/user';
+import {redirectLogin} from '../../utils/redirect';
 
 const User = StyleSheet.create({
   Contain: {
@@ -91,35 +91,38 @@ const CellComponent: FC<any> = ({
       </Text>
     );
   }
+  if (type === ShowType.Disabled) {
+    return (
+      <Text
+        style={{
+          marginTop: 0,
+          color: '#555',
+        }}>
+        {targetData}
+      </Text>
+    );
+  }
   return null;
 };
 
-const work = async () => {
-  const res = await getUserInfo();
-  console.log('res', res);
-  saveUserToken('testToken');
-  console.log(await getUserToken());
-  setTimeout(async () => {
-    console.log(await getUserToken());
-  }, 10000);
-  const loginRes = await userLogin({
-    data: {
-      username: 'ygj111',
-      password: '123456',
-    },
-  });
-  console.log('loginRes', loginRes);
-};
-
-const UserInfo: FC<any> = ({navigationRef}) => {
+const UserInfo: FC<any> = ({navigationRef, route}) => {
+  const [userInfo, setUserInfo] = useState<Record<string, any>>({});
+  const getUserInfoFromstorage = async () => {
+    const res = await getUserInfo();
+    if (!res?.userInfo) {
+      redirectLogin(navigationRef);
+      return;
+    }
+    setUserInfo(res.userInfo);
+  };
   useEffect(() => {
-    work();
-  }, []);
+    getUserInfoFromstorage();
+  }, [route.params]);
 
   return (
     <View style={User.Contain}>
       {userInfoMap?.map(item => {
-        const targetData = MokcUserInfoData[item.key];
+        const targetData = userInfo[item.key];
         return (
           <View style={User.CellItem as any} key={item.key}>
             <Text
@@ -132,7 +135,7 @@ const UserInfo: FC<any> = ({navigationRef}) => {
               type={item.type}
               targetData={targetData}
               navigationRef={navigationRef}
-              UserInfoData={MokcUserInfoData}
+              UserInfoData={userInfo}
               currentKey={item.key}
             />
           </View>

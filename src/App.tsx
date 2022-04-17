@@ -48,12 +48,16 @@ const Main: FC<any> = ({navigationRef}) => {
         <Tab.Navigator>
           <Tab.Screen
             name="Home"
-            component={HomeScreen}
+            component={props => (
+              <HomeScreen {...props} navigationRef={navigationRef} />
+            )}
             options={{header: () => null}}
           />
           <Tab.Screen
             name="TopicScreen"
-            component={TopicScreen}
+            component={props => (
+              <TopicScreen {...props} navigationRef={navigationRef} />
+            )}
             options={{header: () => null}}
           />
         </Tab.Navigator>
@@ -69,8 +73,8 @@ const App = () => {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator initialRouteName="LoginPage">
-          {/* <Stack.Navigator> */}
+        {/* <Stack.Navigator initialRouteName="LoginPage"> */}
+        <Stack.Navigator>
           <Stack.Screen
             name="Main"
             component={props => (
@@ -114,10 +118,13 @@ const App = () => {
           />
           <Stack.Screen
             name="LoginPage"
-            component={props => <LoginPage {...props} />}
+            component={props => (
+              <LoginPage {...props} navigationRef={navigationRef} />
+            )}
             options={{
               title: '用户登录',
               headerBackTitle: 'back',
+              headerLeft: () => <></>,
             }}
           />
         </Stack.Navigator>
