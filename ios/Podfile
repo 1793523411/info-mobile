@@ -16,6 +16,8 @@ target 'InfoMobile' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
   target 'InfoMobileTests' do
     inherit! :complete
     # Pods for testing

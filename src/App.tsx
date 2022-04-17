@@ -28,6 +28,7 @@ import TopicScreen from './pages/TopicScreen';
 import Setting from './pages/Settings';
 import {UserInfoEditorHeadRight} from './pages/UserInfoEditor';
 import LoginPage from './pages/LoginPage';
+import VideoDetail from './pages/VideoDetail';
 
 import MyBack from './components/MyBack';
 import UserInfoEditor from './pages/UserInfoEditor';
@@ -73,8 +74,8 @@ const App = () => {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer ref={navigationRef}>
-        {/* <Stack.Navigator initialRouteName="LoginPage"> */}
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="VideoDetail">
+          {/* <Stack.Navigator> */}
           <Stack.Screen
             name="Main"
             component={props => (
@@ -125,6 +126,16 @@ const App = () => {
               title: '用户登录',
               headerBackTitle: 'back',
               headerLeft: () => <></>,
+            }}
+          />
+          <Stack.Screen
+            name="VideoDetail"
+            component={props => (
+              <VideoDetail {...props} navigationRef={navigationRef} />
+            )}
+            options={{
+              title: '视频详情',
+              headerBackTitle: 'back',
             }}
           />
         </Stack.Navigator>
