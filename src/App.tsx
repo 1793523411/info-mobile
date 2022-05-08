@@ -8,23 +8,16 @@
  * @format
  */
 
-import React, {FC} from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-import Layout from './components/Layout';
+import React from 'react';
 
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import Main from './pages/Main';
 import UserInfo from './pages/UserInfo';
-import HomeScreen from './pages/HomeScreen';
-import TopicScreen from './pages/TopicScreen';
 import Setting from './pages/Settings';
 import {UserInfoEditorHeadRight} from './pages/UserInfoEditor';
 import LoginPage from './pages/LoginPage';
@@ -34,38 +27,9 @@ import MyBack from './components/MyBack';
 import UserInfoEditor from './pages/UserInfoEditor';
 
 import {commonHeaderTitleStye} from './const/header';
+import {StatusBar, useColorScheme} from 'react-native';
 
-const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-const Main: FC<any> = ({navigationRef}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <Layout navigationRef={navigationRef}>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Home"
-            component={props => (
-              <HomeScreen {...props} navigationRef={navigationRef} />
-            )}
-            options={{header: () => null}}
-          />
-          <Tab.Screen
-            name="TopicScreen"
-            component={props => (
-              <TopicScreen {...props} navigationRef={navigationRef} />
-            )}
-            options={{header: () => null}}
-          />
-        </Tab.Navigator>
-      </Layout>
-    </SafeAreaView>
-  );
-};
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -74,8 +38,8 @@ const App = () => {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator initialRouteName="VideoDetail">
-          {/* <Stack.Navigator> */}
+        {/* <Stack.Navigator initialRouteName="VideoDetail"> */}
+        <Stack.Navigator>
           <Stack.Screen
             name="Main"
             component={props => (

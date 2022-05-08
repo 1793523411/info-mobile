@@ -1,7 +1,6 @@
 import React, {FC, useImperativeHandle, useState, forwardRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Video from 'react-native-video';
-import MySlider from './MySlider';
 
 var styles = StyleSheet.create({
   backgroundVideo: {
@@ -72,13 +71,6 @@ const MyVideo: FC<any> = (_, ref) => {
         //  onError={this.videoError}               // Callback when video cannot be loaded
         style={styles.backgroundVideo}
       />
-      <View
-        style={{
-          height: 10,
-          width: '100%',
-        }}
-      />
-      <MySlider />
     </View>
   );
 };
