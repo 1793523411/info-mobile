@@ -29,7 +29,9 @@ const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
   const [isAvatorShow, setIsAvatorShow] = useState(false);
   return (
     <View style={Drawer.drawerHead as any}>
-      <TouchableHighlight onPress={() => setIsAvatorShow(true)}>
+      <TouchableHighlight
+        onPress={() => setIsAvatorShow(true)}
+        underlayColor="#eee">
         <Image
           style={Drawer.draweravator}
           source={{
@@ -39,6 +41,7 @@ const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
       </TouchableHighlight>
 
       <TouchableHighlight
+        underlayColor="#eee"
         onPress={() => {
           navigationRef.navigate('UserInfo');
           setModalVisible(false);

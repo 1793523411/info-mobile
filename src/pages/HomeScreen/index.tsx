@@ -23,7 +23,8 @@ const HomeScreen: FC<any> = () => {
           storage.remove({
             key: 'userInfo',
           });
-        }}>
+        }}
+        underlayColor="#eee">
         <AntdIcon name="pluscircleo" size={30} color="#4F8EF7" />
       </TouchableHighlight>
     </View>

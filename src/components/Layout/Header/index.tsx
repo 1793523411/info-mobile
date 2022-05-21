@@ -19,6 +19,7 @@ const Header: FC<any> = ({setModalVisible}) => {
   return (
     <View style={Drawer.header as any}>
       <TouchableHighlight
+        underlayColor="#eee"
         onPress={() => {
           setModalVisible(true);
         }}>

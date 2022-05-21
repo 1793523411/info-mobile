@@ -4,7 +4,7 @@ import AntdIcon from 'react-native-vector-icons/AntDesign';
 
 const MyBack: FC<any> = ({navigationRef}) => {
   return (
-    <TouchableHighlight onPress={navigationRef.goBack}>
+    <TouchableHighlight onPress={navigationRef.goBack} underlayColor="#eee">
       <View
         style={{
           flexDirection: 'row',

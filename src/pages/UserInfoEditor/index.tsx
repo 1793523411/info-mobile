@@ -24,6 +24,7 @@ export const UserInfoEditorHeadRight: FC<any> = ({navigationRef}) => {
   }, []);
   return (
     <TouchableHighlight
+      underlayColor="#eee"
       onPress={async () => {
         const res = await updateUserInfo({data: currentUserData});
         await saveUserInfo(res.data);

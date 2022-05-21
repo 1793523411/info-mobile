@@ -1,12 +1,25 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {FC} from 'react';
+import {ScrollView} from 'react-native';
+import TopCard from '../../components/TopCard';
 
-function ArticleList() {
+const TopListStyle = {
+  contain: {
+    padding: 10,
+  },
+};
+
+const ArticleList: FC<any> = props => {
   return (
-    <View>
-      <Text>ArticleList</Text>
-    </View>
+    <ScrollView style={TopListStyle.contain}>
+      <TopCard {...props} />
+      <TopCard {...props} />
+      <TopCard {...props} />
+      <TopCard {...props} />
+      <TopCard {...props} />
+      <TopCard {...props} />
+      <TopCard {...props} />
+    </ScrollView>
   );
-}
+};
 
 export default ArticleList;

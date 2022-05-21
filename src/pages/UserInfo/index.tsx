@@ -41,7 +41,9 @@ const CellComponent: FC<any> = ({
   if (type === ShowType.Img) {
     return (
       <>
-        <TouchableHighlight onPress={() => setIsAvatorShow(true)}>
+        <TouchableHighlight
+          underlayColor="#eee"
+          onPress={() => setIsAvatorShow(true)}>
           <Image
             style={{
               width: 30,
@@ -65,6 +67,7 @@ const CellComponent: FC<any> = ({
   if (type === ShowType.Text) {
     return (
       <TouchableHighlight
+        underlayColor="#eee"
         onPress={() =>
           navigationRef.navigate('UserInfoEditor', {
             UserInfoData,

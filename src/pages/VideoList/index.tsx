@@ -1,12 +1,24 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {FC} from 'react';
+import {ScrollView} from 'react-native';
+import VideoCard from '../../components/VideoCard';
 
-function VideoList() {
+const VideoListStyle = {
+  contain: {
+    padding: 10,
+  },
+};
+
+const VideoList: FC<any> = props => {
   return (
-    <View>
-      <Text>VideoList</Text>
-    </View>
+    <ScrollView style={VideoListStyle.contain}>
+      <VideoCard {...props} />
+      <VideoCard {...props} />
+      <VideoCard {...props} />
+      <VideoCard {...props} />
+      <VideoCard {...props} />
+      <VideoCard {...props} />
+    </ScrollView>
   );
-}
+};
 
 export default VideoList;

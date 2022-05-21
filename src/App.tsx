@@ -28,6 +28,7 @@ import UserInfoEditor from './pages/UserInfoEditor';
 
 import {commonHeaderTitleStye} from './const/header';
 import {StatusBar, useColorScheme} from 'react-native';
+import ArticleDetail from './pages/ArticleDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -99,6 +100,16 @@ const App = () => {
             )}
             options={{
               title: '视频详情',
+              headerBackTitle: 'back',
+            }}
+          />
+          <Stack.Screen
+            name="ArticleDetail"
+            component={props => (
+              <ArticleDetail {...props} navigationRef={navigationRef} />
+            )}
+            options={{
+              title: '文章详情',
               headerBackTitle: 'back',
             }}
           />

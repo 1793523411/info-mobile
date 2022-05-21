@@ -20,7 +20,7 @@ const Main: FC<any> = ({navigationRef}) => {
     <SafeAreaView style={backgroundStyle}>
       <Layout navigationRef={navigationRef}>
         <Tab.Navigator>
-          <Tab.Screen
+          {/* <Tab.Screen
             name="Home"
             component={props => (
               <HomeScreen {...props} navigationRef={navigationRef} />
@@ -33,7 +33,7 @@ const Main: FC<any> = ({navigationRef}) => {
               <TopicScreen {...props} navigationRef={navigationRef} />
             )}
             options={{header: () => null}}
-          />
+          /> */}
           <Tab.Screen
             name="VideoList"
             component={props => (
