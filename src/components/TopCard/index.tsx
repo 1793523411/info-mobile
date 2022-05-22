@@ -1,4 +1,5 @@
-import React, {FC} from 'react';
+import dayjs from 'dayjs';
+import React, {FC, useMemo} from 'react';
 import {Text, TouchableHighlight, View} from 'react-native';
 
 const VideoCardStyle = {
@@ -46,6 +47,13 @@ const VideoCardStyle = {
 // }
 
 const TopCard: FC<any> = props => {
+  const {
+    articleItem: {topic_time, user_name, topic_body},
+  } = props;
+  const content = useMemo(() => {
+    const data = JSON.parse(topic_body);
+    return data;
+  }, [topic_body]);
   const cardClick = () => {
     props.navigationRef.navigate('ArticleDetail');
   };
@@ -54,20 +62,22 @@ const TopCard: FC<any> = props => {
       <View style={VideoCardStyle.conatin as any}>
         <View style={VideoCardStyle.top as any}>
           <View style={VideoCardStyle.title}>
-            <Text style={VideoCardStyle.titleText}>Title</Text>
+            <Text style={VideoCardStyle.titleText}>{content.topicTitle}</Text>
           </View>
         </View>
         <View style={VideoCardStyle.middle}>
-          <Text>文章的描述，文章的描述，文章的描述</Text>
+          <Text>{content.topicTag.join(',')}</Text>
         </View>
         <View style={VideoCardStyle.bottom as any}>
           <View style={VideoCardStyle.author as any}>
             <Text style={{fontSize: 12}}>作者: </Text>
-            <Text style={{fontSize: 12}}>ygj</Text>
+            <Text style={{fontSize: 12}}>{user_name}</Text>
           </View>
           <View style={VideoCardStyle.time as any}>
             <Text style={{fontSize: 12}}>时间: </Text>
-            <Text style={{fontSize: 12}}>2021-1-1</Text>
+            <Text style={{fontSize: 12}}>
+              {dayjs(Number(topic_time)).format('YYYY-MM-DD HH:mm')}
+            </Text>
           </View>
         </View>
       </View>

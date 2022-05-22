@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, {FC} from 'react';
 import {Image, Text, TouchableHighlight, View} from 'react-native';
 
@@ -47,8 +48,13 @@ const VideoCardStyle = {
 // }
 
 const VideoCard: FC<any> = props => {
+  const {
+    videoItem: {user_name, rid, vmurl, vname, vtime},
+  } = props;
   const cardClick = () => {
-    props.navigationRef.navigate('VideoDetail');
+    props.navigationRef.navigate('VideoDetail', {
+      rid,
+    });
   };
   return (
     <TouchableHighlight onPress={() => cardClick()} underlayColor="#eee">
@@ -57,21 +63,21 @@ const VideoCard: FC<any> = props => {
           <Image
             style={VideoCardStyle.img}
             source={{
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
+              uri: vmurl,
             }}
           />
         </View>
         <View style={VideoCardStyle.right as any}>
           <View style={VideoCardStyle.title}>
-            <Text style={VideoCardStyle.titleText}>Title</Text>
+            <Text style={VideoCardStyle.titleText}>{vname}</Text>
           </View>
           <View style={VideoCardStyle.author as any}>
             <Text>作者: </Text>
-            <Text>ygj</Text>
+            <Text>{user_name}</Text>
           </View>
           <View style={VideoCardStyle.time as any}>
             <Text>时间: </Text>
-            <Text>2021-1-1</Text>
+            <Text>{dayjs(Number(vtime)).format('YYYY-MM-DD HH:mm')}</Text>
           </View>
         </View>
       </View>

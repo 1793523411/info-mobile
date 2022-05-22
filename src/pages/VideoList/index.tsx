@@ -1,6 +1,8 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ScrollView} from 'react-native';
+import {getVideoList} from '../../api/video';
 import VideoCard from '../../components/VideoCard';
+import {redirectLogin} from '../../utils/redirect';
 
 const VideoListStyle = {
   contain: {
@@ -9,14 +11,35 @@ const VideoListStyle = {
 };
 
 const VideoList: FC<any> = props => {
+  const [videoList, setVideoList] = useState([]);
+  const requestVideoList = async () => {
+    const res: any = await getVideoList({
+      data: {
+        page: '1',
+        pageSize: '20',
+      },
+    });
+    if (res?.code !== 0) {
+      redirectLogin(props.navigationRef);
+    } else {
+      setVideoList(res.data.data);
+      console.log('res', res);
+    }
+  };
+  useEffect(() => {
+    requestVideoList();
+  }, []);
   return (
     <ScrollView style={VideoListStyle.contain}>
-      <VideoCard {...props} />
-      <VideoCard {...props} />
-      <VideoCard {...props} />
-      <VideoCard {...props} />
-      <VideoCard {...props} />
-      <VideoCard {...props} />
+      {videoList.map((item: any) => {
+        return (
+          <VideoCard
+            {...props}
+            videoItem={item}
+            key={item?.rid + item?.vtime}
+          />
+        );
+      })}
     </ScrollView>
   );
 };

@@ -6,7 +6,12 @@ const instance = axios.create({
   timeout: 3000,
 });
 
-const allNeedToken = ['/api/v1/search_user_info', '/api/v1/save_user_info'];
+const allNeedToken = [
+  '/api/v1/search_user_info',
+  '/api/v1/save_user_info',
+  '/api/v1/get_video_list',
+  '/api/v1/get_topic_list',
+];
 
 instance.interceptors.request.use(
   async config => {
