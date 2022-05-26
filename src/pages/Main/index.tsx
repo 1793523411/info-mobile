@@ -5,8 +5,8 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AntdIcon from 'react-native-vector-icons/AntDesign';
 import Layout from '../../components/Layout';
 import ArticleList from '../ArticleList';
-import HomeScreen from '../HomeScreen';
-import TopicScreen from '../TopicScreen';
+// import HomeScreen from '../HomeScreen';
+// import TopicScreen from '../TopicScreen';
 import VideoList from '../VideoList';
 
 const Tab = createBottomTabNavigator();
@@ -20,7 +20,7 @@ const Main: FC<any> = ({navigationRef}) => {
     <SafeAreaView style={backgroundStyle}>
       <Layout navigationRef={navigationRef}>
         <Tab.Navigator initialRouteName="VideoList">
-          <Tab.Screen
+          {/* <Tab.Screen
             name="Home"
             component={props => (
               <HomeScreen {...props} navigationRef={navigationRef} />
@@ -33,7 +33,7 @@ const Main: FC<any> = ({navigationRef}) => {
               <TopicScreen {...props} navigationRef={navigationRef} />
             )}
             options={{header: () => null}}
-          />
+          /> */}
           <Tab.Screen
             name="VideoList"
             component={props => (

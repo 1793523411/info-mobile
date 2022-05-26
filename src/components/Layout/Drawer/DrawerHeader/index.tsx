@@ -25,7 +25,7 @@ const Drawer = {
   },
 };
 
-const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
+const DrawerHeader: FC<any> = ({navigationRef, setModalVisible, userInfo}) => {
   const [isAvatorShow, setIsAvatorShow] = useState(false);
   return (
     <View style={Drawer.drawerHead as any}>
@@ -35,7 +35,7 @@ const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
         <Image
           style={Drawer.draweravator}
           source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
+            uri: userInfo?.avatar,
           }}
         />
       </TouchableHighlight>
@@ -50,7 +50,7 @@ const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
           style={{
             flexDirection: 'row',
           }}>
-          <Text style={Drawer.drawerHeadNick}>跌倒的小黄瓜</Text>
+          <Text style={Drawer.drawerHeadNick}>{userInfo?.nickname}</Text>
           <View style={Drawer.drawerIcon}>
             <AntdIcon name="right" size={13} color="#333" />
           </View>
@@ -60,7 +60,7 @@ const DrawerHeader: FC<any> = ({navigationRef, setModalVisible}) => {
       <Modal visible={isAvatorShow} transparent={true}>
         <ImageViewer
           onClick={() => setIsAvatorShow(false)}
-          imageUrls={[{url: 'https://reactnative.dev/img/tiny_logo.png'}]}
+          imageUrls={[{url: userInfo?.avatar}]}
         />
       </Modal>
     </View>

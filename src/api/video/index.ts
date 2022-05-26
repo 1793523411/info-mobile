@@ -7,3 +7,13 @@ export const getVideoList = ({data}: any) => {
     data,
   });
 };
+
+export const getVideoDetail = ({rid}: any) => {
+  return instance({
+    url: '/api/v1/search_video_list',
+    method: 'get',
+    params: {
+      rid,
+    },
+  });
+};

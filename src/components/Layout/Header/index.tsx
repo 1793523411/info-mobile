@@ -12,10 +12,11 @@ const Drawer = {
     width: 25,
     height: 25,
     marginRight: 5,
+    borderRadius: 15,
   },
 };
 
-const Header: FC<any> = ({setModalVisible}) => {
+const Header: FC<any> = ({setModalVisible, userInfo}) => {
   return (
     <View style={Drawer.header as any}>
       <TouchableHighlight
@@ -26,11 +27,16 @@ const Header: FC<any> = ({setModalVisible}) => {
         <Image
           style={Drawer.headImg}
           source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
+            uri: userInfo?.avatar,
           }}
         />
       </TouchableHighlight>
-      <Text>title</Text>
+      <Text
+        style={{
+          paddingTop: 3,
+        }}>
+        {userInfo?.nickname}
+      </Text>
     </View>
   );
 };

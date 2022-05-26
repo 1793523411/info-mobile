@@ -16,13 +16,15 @@ const VideoList: FC<any> = props => {
     const res: any = await getVideoList({
       data: {
         page: '1',
-        pageSize: '20',
+        pageSize: '99',
       },
     });
     if (res?.code !== 0) {
       redirectLogin(props.navigationRef);
     } else {
-      setVideoList(res.data.data);
+      setVideoList(
+        res.data.data.filter((item: any) => item.vstatus === 'done'),
+      );
       console.log('res', res);
     }
   };

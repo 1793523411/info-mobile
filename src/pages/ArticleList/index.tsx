@@ -12,11 +12,11 @@ const TopListStyle = {
 
 const ArticleList: FC<any> = props => {
   const [articleList, setArticleList] = useState([]);
-  const requestVideoList = async () => {
+  const requestArticleList = async () => {
     const res: any = await getTopList({
       data: {
         page: '1',
-        pageSize: '20',
+        pageSize: '99',
       },
     });
     if (res?.code !== 0) {
@@ -27,7 +27,7 @@ const ArticleList: FC<any> = props => {
     }
   };
   useEffect(() => {
-    requestVideoList();
+    requestArticleList();
   }, []);
   return (
     <ScrollView style={TopListStyle.contain}>

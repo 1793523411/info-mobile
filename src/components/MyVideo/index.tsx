@@ -9,7 +9,10 @@ var styles = StyleSheet.create({
   },
 });
 
-const MyVideo: FC<any> = (_, ref) => {
+const MyVideo: FC<any> = (props, ref) => {
+  const {uri} = props;
+  console.log('=====>uri<=====', uri);
+  // debugger;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [videoRef, setVideoRef] = useState<Video | null>();
   // const videoRef = useRef();
@@ -42,10 +45,10 @@ const MyVideo: FC<any> = (_, ref) => {
       <Video
         // Can be a URL or a local file.
         source={{
-          uri: 'https://info-share.oss-cn-beijing.aliyuncs.com/video/video-43670271318030653-xgplayer-demo-720p.mp4',
+          uri: uri,
         }}
         ref={r => {
-          console.log('r', r);
+          // console.log('r', r);
           if (r) {
             setVideoRef(r);
           }
@@ -53,7 +56,7 @@ const MyVideo: FC<any> = (_, ref) => {
         repeat={false}
         fullscreen={true}
         paused={paused}
-        rate={2.0}
+        rate={1.0}
         controls={true}
         onEnd={() => {
           console.log('视频播放完成');

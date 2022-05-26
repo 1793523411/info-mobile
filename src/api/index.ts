@@ -11,6 +11,8 @@ const allNeedToken = [
   '/api/v1/save_user_info',
   '/api/v1/get_video_list',
   '/api/v1/get_topic_list',
+  '/api/v1/search_topic_list',
+  '/api/v1/search_video_list',
 ];
 
 instance.interceptors.request.use(

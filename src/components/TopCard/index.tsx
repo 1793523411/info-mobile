@@ -48,14 +48,16 @@ const VideoCardStyle = {
 
 const TopCard: FC<any> = props => {
   const {
-    articleItem: {topic_time, user_name, topic_body},
+    articleItem: {topic_time, user_name, rid, topic_body},
   } = props;
   const content = useMemo(() => {
     const data = JSON.parse(topic_body);
     return data;
   }, [topic_body]);
   const cardClick = () => {
-    props.navigationRef.navigate('ArticleDetail');
+    props.navigationRef.navigate('ArticleDetail', {
+      rid,
+    });
   };
   return (
     <TouchableHighlight onPress={() => cardClick()} underlayColor="#eee">
